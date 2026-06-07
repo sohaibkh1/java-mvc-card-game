@@ -1,0 +1,27 @@
+# Maven build output
+target/
+
+# Bundled local development tools
+.tools/
+
+# IDE and OS files
+.settings/
+.classpath
+.project
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Generated game output
+player*_output.txt
+deck*_output.txt
+
+# Local secrets and environment files
+.env
+.env.*
+*.key
+*.pem
+
+# Duplicate/export archives
+Code.zip
