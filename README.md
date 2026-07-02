@@ -1,6 +1,6 @@
 # COMM110J Card Game
 
-This is a Java Maven project for the COMM110J multi-threaded card game coursework.
+This is a Java Maven project multi-threaded card game 
 
 The program asks for the number of players and a pack file. The number of players must be a positive integer. It checks that the pack has exactly `8n` non-negative integer card values before the game starts. The game then creates `n` players, `n` decks, and one thread for each player.
 
