@@ -1,4 +1,4 @@
-# COMM110J Card Game
+Card Game
 
 This is a Java Maven project multi-threaded card game 
 
