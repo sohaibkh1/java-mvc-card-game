@@ -1,14 +1,28 @@
-Card Game
+# Java Multithreaded Card Game
 
-This is a Java Maven project multi-threaded card game 
+A Java Maven implementation of a multithreaded card game simulation.
 
-The program asks for the number of players and a pack file. The number of players must be a positive integer. It checks that the pack has exactly `8n` non-negative integer card values before the game starts. The game then creates `n` players, `n` decks, and one thread for each player.
+The program creates a configurable number of players and decks, validates an input pack, deals cards in a round-robin structure, and runs one thread per player until a winning hand is found.
 
-## Versions
+## Features
+
+- Configurable number of players
+- Input validation for player count and pack files
+- Pack size validation using the `8n` card rule
+- Non-negative integer card values
+- One thread per player
+- Ring-based draw and discard flow
+- Atomic draw/discard turns using shared synchronization
+- Player output files
+- Final deck output files
+- JUnit test coverage
+- Executable Maven JAR build
+
+## Requirements
 
 - Java 11 or later
-- JUnit 5.10.2
 - Maven
+- JUnit 5.10.2
 
 ## Run Tests
 
@@ -16,62 +30,29 @@ The program asks for the number of players and a pack file. The number of player
 mvn test
 ```
 
-## Build The Jar
+## Build the JAR
 
 ```bash
 mvn package
 ```
 
-The built jar is:
+The built JAR is:
 
 ```text
 target/cards.jar
 ```
 
-The jar contains both the compiled `.class` files and the source `.java` files.
-
-## Run The Game
+## Run the Game
 
 ```bash
 java -jar target/cards.jar
 ```
 
-The program prompts:
+The program prompts for:
 
 ```text
 Please enter the number of players:
 Please enter pack file location:
-```
-
-If the number of players is invalid, it prints:
-
-```text
-Invalid number of players. Please enter a positive integer.
-```
-
-If the pack file is invalid, it prints:
-
-```text
-Invalid pack file. Please try again.
-```
-
-The game writes output files in the working directory when running normally:
-
-```text
-player1_output.txt
-player2_output.txt
-deck1_output.txt
-deck2_output.txt
-```
-
-For `n` players, where `n` is a positive integer, there are `n` player files and `n` deck files.
-
-## Test Pack Files
-
-The valid test pack files include 1 to 8 players. The sample immediate-win packs use small card values from 1 to 10. The 0-player file is an invalid example. The test pack files are in:
-
-```text
-src/test/resources/packs/
 ```
 
 A sample run with two players can use:
@@ -82,7 +63,33 @@ src/test/resources/packs/valid_eventual_win_2.txt
 
 After entering `2` for the number of players, enter that pack path when prompted.
 
+## Input Rules
 
+The number of players must be a positive integer.
 
+For `n` players, the pack file must contain exactly `8n` rows. Each row must contain one non-negative integer card value.
 
+Invalid player counts and invalid pack files are rejected before the game starts.
 
+## Output Files
+
+The game writes output files in the working directory:
+
+```text
+player1_output.txt
+player2_output.txt
+deck1_output.txt
+deck2_output.txt
+```
+
+For `n` players, there are `n` player files and `n` deck files.
+
+## Main Classes
+
+- `Card` - immutable card value
+- `CardDeck` - synchronized deck queue
+- `Player` - player logic and thread execution
+- `GameState` - shared winner state
+- `PackReader` - pack file parsing and validation
+- `InvalidPackException` - invalid pack handling
+- `CardGame` - command-line entry point and game setup
